@@ -87,9 +87,9 @@ NAN_METHOD(scrypt) {
    if(!node::Buffer::HasInstance(target))
        return except("Argument should be a buffer object.");
 
-   Local<Number> numn = Nan::To<Number>(info[1]);
+   Local<Number> numn = Nan::To<Number>(info[1]).ToLocalChecked();
    unsigned int nValue = numn->Value();
-   Local<Number> numr = Nan::To<Number>(info[2]);
+   Local<Number> numr = Nan::To<Number>(info[2]).ToLocalChecked();
    unsigned int rValue = numr->Value();
 
    char * input = node::Buffer::Data(target);
@@ -114,7 +114,7 @@ NAN_METHOD(scryptn) {
    if(!node::Buffer::HasInstance(target))
        return except("Argument should be a buffer object.");
 
-   Local<Number> num = Nan::To<Number>(info[1]);
+   Local<Number> num = Nan::To<Number>(info[1]).ToLocalChecked();
    unsigned int nFactor = num->Value();
 
    char * input = node::Buffer::Data(target);
@@ -140,16 +140,16 @@ NAN_METHOD(scryptjane) {
     if(!node::Buffer::HasInstance(target))
         return except("First should be a buffer object.");
 
-    Local<Number> num = Nan::To<Number>(info[1]);
+    Local<Number> num = Nan::To<Number>(info[1]).ToLocalChecked();
     int timestamp = num->Value();
 
-    Local<Number> num2 = Nan::To<Number>(info[2]);
+    Local<Number> num2 = Nan::To<Number>(info[2]).ToLocalChecked();
     int nChainStartTime = num2->Value();
 
-    Local<Number> num3 = Nan::To<Number>(info[3]);
+    Local<Number> num3 = Nan::To<Number>(info[3]).ToLocalChecked();
     int nMin = num3->Value();
 
-    Local<Number> num4 = Nan::To<Number>(info[4]);
+    Local<Number> num4 = Nan::To<Number>(info[4]).ToLocalChecked();
     int nMax = num4->Value();
 
     char * input = node::Buffer::Data(target);
