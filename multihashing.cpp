@@ -436,7 +436,7 @@ NAN_METHOD(boolberry) {
 
     if(info.Length() >= 3)
         if(info[2]->IsUint32())
-            height = Nan::To<Uint32>(info[2]).ToLocalChecked().Uint32Value();
+            height = Nan::To<Uint32>(info[2]).ToLocalChecked().Value();
         else
             return except("Argument 3 should be an unsigned integer.");
 
