@@ -49,7 +49,7 @@ NAN_METHOD(quark) {
     char * input = node::Buffer::Data(target);
     Nan::MaybeLocal<v8::Object> dest = Nan::NewBuffer(32);
     char* output = node::Buffer::Data(dest.ToLocalChecked());
-    
+
     uint32_t input_len = node::Buffer::Length(target);
 
     quark_hash(input, output, input_len);
@@ -86,18 +86,18 @@ NAN_METHOD(scrypt) {
 
    if(!node::Buffer::HasInstance(target))
        return except("Argument should be a buffer object.");
-    
-   Local<Number> numn = info[1]->ToNumber();
+
+   Local<Number> numn = Nan::To<Number>(info[1]);
    unsigned int nValue = numn->Value();
-   Local<Number> numr = info[2]->ToNumber();
+   Local<Number> numr = Nan::To<Number>(info[2]);
    unsigned int rValue = numr->Value();
-   
+
    char * input = node::Buffer::Data(target);
    Nan::MaybeLocal<v8::Object> dest = Nan::NewBuffer(32);
    char* output = node::Buffer::Data(dest.ToLocalChecked());
 
    uint32_t input_len = node::Buffer::Length(target);
-   
+
    scrypt_N_R_1_256(input, output, nValue, rValue, input_len);
 
    info.GetReturnValue().Set(dest.ToLocalChecked());
@@ -114,7 +114,7 @@ NAN_METHOD(scryptn) {
    if(!node::Buffer::HasInstance(target))
        return except("Argument should be a buffer object.");
 
-   Local<Number> num = info[1]->ToNumber();
+   Local<Number> num = Nan::To<Number>(info[1]);
    unsigned int nFactor = num->Value();
 
    char * input = node::Buffer::Data(target);
@@ -140,16 +140,16 @@ NAN_METHOD(scryptjane) {
     if(!node::Buffer::HasInstance(target))
         return except("First should be a buffer object.");
 
-    Local<Number> num = info[1]->ToNumber();
+    Local<Number> num = Nan::To<Number>(info[1]);
     int timestamp = num->Value();
 
-    Local<Number> num2 = info[2]->ToNumber();
+    Local<Number> num2 = Nan::To<Number>(info[2]);
     int nChainStartTime = num2->Value();
 
-    Local<Number> num3 = info[3]->ToNumber();
+    Local<Number> num3 = Nan::To<Number>(info[3]);
     int nMin = num3->Value();
 
-    Local<Number> num4 = info[4]->ToNumber();
+    Local<Number> num4 = Nan::To<Number>(info[4]);
     int nMax = num4->Value();
 
     char * input = node::Buffer::Data(target);
@@ -216,7 +216,7 @@ NAN_METHOD(skein) {
     char* output = node::Buffer::Data(dest.ToLocalChecked());
 
     uint32_t input_len = node::Buffer::Length(target);
-    
+
     skein_hash(input, output, input_len);
 
     info.GetReturnValue().Set(dest.ToLocalChecked());
@@ -235,7 +235,7 @@ NAN_METHOD(groestl) {
     char * input = node::Buffer::Data(target);
     Nan::MaybeLocal<v8::Object> dest = Nan::NewBuffer(32);
     char* output = node::Buffer::Data(dest.ToLocalChecked());
-    
+
     uint32_t input_len = node::Buffer::Length(target);
 
     groestl_hash(input, output, input_len);
@@ -256,7 +256,7 @@ NAN_METHOD(groestlmyriad) {
     char * input = node::Buffer::Data(target);
     Nan::MaybeLocal<v8::Object> dest = Nan::NewBuffer(32);
     char* output = node::Buffer::Data(dest.ToLocalChecked());
-    
+
     uint32_t input_len = node::Buffer::Length(target);
 
     groestlmyriad_hash(input, output, input_len);
@@ -277,7 +277,7 @@ NAN_METHOD(blake) {
     char * input = node::Buffer::Data(target);
     Nan::MaybeLocal<v8::Object> dest = Nan::NewBuffer(32);
     char* output = node::Buffer::Data(dest.ToLocalChecked());
-    
+
     uint32_t input_len = node::Buffer::Length(target);
 
     blake_hash(input, output, input_len);
@@ -298,7 +298,7 @@ NAN_METHOD(fugue) {
     char * input = node::Buffer::Data(target);
     Nan::MaybeLocal<v8::Object> dest = Nan::NewBuffer(32);
     char* output = node::Buffer::Data(dest.ToLocalChecked());
-    
+
     uint32_t input_len = node::Buffer::Length(target);
 
     fugue_hash(input, output, input_len);
@@ -319,7 +319,7 @@ NAN_METHOD(qubit) {
     char * input = node::Buffer::Data(target);
     Nan::MaybeLocal<v8::Object> dest = Nan::NewBuffer(32);
     char* output = node::Buffer::Data(dest.ToLocalChecked());
-    
+
     uint32_t input_len = node::Buffer::Length(target);
 
     qubit_hash(input, output, input_len);
@@ -340,7 +340,7 @@ NAN_METHOD(hefty1) {
     char * input = node::Buffer::Data(target);
     Nan::MaybeLocal<v8::Object> dest = Nan::NewBuffer(32);
     char* output = node::Buffer::Data(dest.ToLocalChecked());
-    
+
     uint32_t input_len = node::Buffer::Length(target);
 
     hefty1_hash(input, output, input_len);
@@ -361,7 +361,7 @@ NAN_METHOD(shavite3) {
     char * input = node::Buffer::Data(target);
     Nan::MaybeLocal<v8::Object> dest = Nan::NewBuffer(32);
     char* output = node::Buffer::Data(dest.ToLocalChecked());
-    
+
     uint32_t input_len = node::Buffer::Length(target);
 
     shavite3_hash(input, output, input_len);
@@ -374,7 +374,7 @@ NAN_METHOD(cryptonight) {
 
     if (info.Length() < 1)
         return except("You must provide one argument.");
-    
+
     if (info.Length() >= 2) {
         if(!info[1]->IsBoolean())
             return except("Argument 2 should be a boolean");
@@ -389,7 +389,7 @@ NAN_METHOD(cryptonight) {
     char * input = node::Buffer::Data(target);
     Nan::MaybeLocal<v8::Object> dest = Nan::NewBuffer(32);
     char* output = node::Buffer::Data(dest.ToLocalChecked());
-    
+
     uint32_t input_len = node::Buffer::Length(target);
 
     if(fast)
