@@ -435,8 +435,10 @@ NAN_METHOD(boolberry) {
         return except("Argument 2 should be a buffer object.");
 
     if(info.Length() >= 3)
-        if(info[2]->IsUint32())
-            height = Nan::To<Uint32>(info[2]).ToLocalChecked().Value();
+        if(info[2]->IsUint32()) {
+            Local<Uint32> val = Nan::To<Uint32>(info[2]).ToLocalChecked();
+            height = val -> Value();
+        }
         else
             return except("Argument 3 should be an unsigned integer.");
 
